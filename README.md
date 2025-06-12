@@ -50,7 +50,7 @@ docker container exec -it websrever /bin/bash >> execute the container
 Path for changes >>> cd htdocs/
 
 
-# How to create the images and run as containerization?
+## How to create the images and run as containerization?
 -First you need to login the EC2 instance where you have install Docker:
 
 -Now Creating the directory in the Docker server 
