@@ -57,6 +57,44 @@ Path for changes >>> cd htdocs/
 
 -Under the docker we can create the file name image, where we clone the git resposrity of the python pogram
 
+# Dockerfile Keywords Guide
+
+This document provides a basic overview of commonly used Dockerfile instructions. A Dockerfile is a simple text file containing predefined, case-sensitive keywords used to build custom Docker images.
+
+---
+
+## 🐳 Common Dockerfile Instructions
+
+| Keyword      | Description |
+|--------------|-------------|
+| **FROM**      | Specifies the base image from which the Docker image is created. |
+| **MAINTAINER**| Represents the name of the organization or author who created the Dockerfile. *(Deprecated in favor of `LABEL`)* |
+| **CMD**       | Defines the default command that will run when the container starts. |
+| **ENTRYPOINT**| Sets the default application to be executed inside the container. It also allows arguments to be passed from the `CMD` instruction. |
+| **RUN**       | Executes commands in the container during the image build process. Commonly used to install software packages. |
+| **USER**      | Specifies the default user to use when running the image. |
+| **WORKDIR**   | Sets the working directory inside the container. |
+| **COPY**      | Copies files and directories from the host machine to the container. |
+| **ADD**       | Similar to `COPY`, but also supports downloading files from URLs and unpacking compressed files. |
+| **ENV**       | Sets environment variables inside the container. |
+| **EXPOSE**    | Indicates which port the container listens on at runtime. |
+| **VOLUME**    | Creates a mount point with a specified path and marks it as holding externally mounted volumes from the native host or other containers. |
+| **LABEL**     | Adds metadata to an image, such as a version or description. |
+| **STOPSIGNAL**| Defines the system call signal that will be sent to the container to exit gracefully. |
+
+---
+
+## 📝 Example Dockerfile
+
+```Dockerfile
+FROM ubuntu:20.04
+MAINTAINER example@example.com
+RUN apt-get update && apt-get install -y nginx
+COPY ./index.html /var/www/html/
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
+
 -While creating the image we require the one text file which is help us to execute the command
 
 -so creating the text file inside same path “Dockerfile”
