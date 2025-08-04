@@ -93,6 +93,7 @@ RUN apt-get update && apt-get install -y nginx
 COPY ./index.html /var/www/html/
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+```
 
 -While creating the image we require the one text file which is help us to execute the command
 
@@ -122,8 +123,8 @@ To initialize the Swarm on the manager node, use the following command:
 ```bash
 docker swarm init --advertise-addr <private_ip_of_manager>
 
-'''bash
 docker swarm init --advertise-addr 172.31.27.151
+```
 
 ## ⚖️ Load Balancer in Docker Swarm
 
@@ -137,13 +138,13 @@ To create a service with multiple replicas (e.g., 5 instances of a webserver), u
 
 ```bash
 docker service create --name webserver -p 9090:8080 --replicas 5 tomee
-
+```
 ### 📋 Check Service Status
 To view the current status of your service and see where replicas are deployed:
 
 ```bash
 docker service ps webserver
-
+```
 ## 🗑️ Remove a Service
 
 To remove a service from the Docker Swarm, use the following command:
@@ -152,7 +153,7 @@ To remove a service from the Docker Swarm, use the following command:
 docker service rm <service_name>
 Example:
 docker service rm webserver
-
+```
 ## 📈 Scaling of Containers
 
 When business requirements increase, we should be able to **increase the number of container replicas** to handle additional load.  
@@ -166,11 +167,11 @@ This **scaling must happen without any downtime** in a Docker Swarm environment.
 ```bash
 docker service create --name webserver -p 9090:8080 --replicas 2 tomee
 docker service ps webserver
-
+```
 ### 🔁 Scale the Service
 ```bash
 docker service scale webserver=10
-
+```
 ### 🔄 Rolling Updates in Docker Swarm
 The services running in docker swarm, can be updated to any other version without any downtime. This is perfomed by docker swarm by updating one replica after another. This is called as rolling update.
 
@@ -191,14 +192,14 @@ cwvyanxhg7mo   myredis.2       redis:4   Manager   Running         Running 58 se
 425loaqngk0i    \_ myredis.2   redis:3   Manager   Shutdown        Shutdown about a minute ago
 lepxesa1jkwh   myredis.3       redis:4   Manager   Running         Running 56 seconds ago
 luct0k018q9x    \_ myredis.3   redis:3   Node01    Shutdown        Shutdown 57 seconds ago
-
- To check that how many are shutdown and running we use grep command
-
+```
+ - To check that how many are shutdown and running we use grep command
+```bash
 docker service ps myredis | grep "Shutdown"
 docker service ps myredis | grep "Running"
-
+```
 ## Rollback: We can rollback the version in the previous version we cam use rollback commnad in service
-
+```bash
  docker service update --rollback myredis
-
+```
 
